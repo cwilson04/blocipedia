@@ -23,6 +23,7 @@
  gem 'bootstrap'
  gem 'figaro'
  gem 'pry'
+ gem 'pundit', '~> 1.1'
 
  group :development, :test do
    gem 'byebug'

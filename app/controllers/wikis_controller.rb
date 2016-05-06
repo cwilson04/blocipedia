@@ -23,6 +23,7 @@ class WikisController < ApplicationController
   
   def show
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
   
   def edit 
@@ -33,7 +34,7 @@ class WikisController < ApplicationController
     @wiki = Wiki.find(params[:id])
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
-
+    authorize @wiki
     if @wiki.save
       flash[:notice] = "Wiki was updated successfully."
       redirect_to @wiki
