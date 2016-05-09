@@ -24,6 +24,7 @@
  gem 'figaro'
  gem 'pry'
  gem 'pundit', '~> 1.1'
+ gem 'faker'
 
  group :development, :test do
    gem 'byebug'
