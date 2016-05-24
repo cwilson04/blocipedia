@@ -1,4 +1,13 @@
 class ChargesController < ApplicationController
+ 
+ def new
+   @stripe_btn_data = {
+     key: "#{ Rails.configuration.stripe[:publishable_key] }",
+     description: "Premium Membership - #{current_user.email}",
+     amount: 10000
+   }
+ end
+ 
   def create
    customer = Stripe::Customer.create(
      email: current_user.email,
@@ -17,13 +26,5 @@ class ChargesController < ApplicationController
    rescue Stripe::CardError => e
      flash[:alert] = e.message
      redirect_to new_charge_path
-  end
-  
-  def new
-   @stripe_btn_data = {
-     key: "#{ Rails.configuration.stripe[:publishable_key] }",
-     description: "Premium Membership - #{current_user.email}",
-     amount: 10000
-   }
   end
 end

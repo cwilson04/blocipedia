@@ -12,6 +12,11 @@
       <li><%= link_to "Blocipedia", root_path %></li>
       <li><%= link_to "All Wikis", wikis_path %></li>
       <li><%= link_to 'New Wiki', new_wiki_path, :class => 'navbar-link' %></li>
+      <li>
+        <% if current_user %>
+          <%= link_to 'User Profile', user_path(current_user), :class => 'navbar-link' %>
+        <% end %>
+      </li>
     </ul>
     <ul class="navbar-text navbar-right">
       <% if user_signed_in? %>
