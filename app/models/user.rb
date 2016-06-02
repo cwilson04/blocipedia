@@ -5,6 +5,15 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
          
   has_many :wikis, dependent: :destroy
+  has_many :collaborators
+  has_many :wikis, through: :collaborators
+  
+  def wikis
+    the_wikis = []
+    the_wikis << Collaborator.where(user: self).map(&:wiki)
+    the_wikis << Wiki.where(user: self)
+    the_wikis.flatten
+  end
   
   def standard?
     role == "standard"

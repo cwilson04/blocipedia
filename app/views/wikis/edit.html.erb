@@ -27,3 +27,9 @@
    </div>
   </div>
  </div>
+ <h2>Add Collaborator</h2>
+ <%= form_tag [@wiki, Collaborator.new] do %>
+  <%= text_field_tag :email %>
+  <%= submit_tag %>
+ <% end %>
+ 
