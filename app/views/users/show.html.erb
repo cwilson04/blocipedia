@@ -42,7 +42,7 @@
 
 <% current_user.wikis.each do |wiki| %>
 <ul class="list-group">
-  <li class="list-group-item"><h4><%= link_to wiki.title %></h4><p><%= wiki.body %></p></li>
+  <li class="list-group-item"><h4><%= link_to wiki.title %></h4><p><%= markdown wiki.body %></p></li>
 </ul>
      
      <% end %>

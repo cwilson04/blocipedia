@@ -25,6 +25,7 @@
  gem 'pundit', '~> 1.1'
  gem 'faker'
  gem 'stripe'
+ gem 'redcarpet'
 
  group :development, :test do
    gem 'byebug'
