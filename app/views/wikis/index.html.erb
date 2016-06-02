@@ -2,6 +2,7 @@
  <h1>All Wikis</h1>
 </div>
   <% @wikis.each do |wiki| %>
+  <% if wiki.public? || (wiki.private? && current_user == wiki.user) %>
   <div class="container">
     <div class="list-group">
        <h4 class="list-group-item-heading">
@@ -10,5 +11,6 @@
        <p class="list-group-item-body"><%= link_to wiki.body, wiki %></p>
      </div>
   </div>
+  <% end %>
 <% end %>
  

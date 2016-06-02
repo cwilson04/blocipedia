@@ -5,7 +5,7 @@ class WikiPolicy < ApplicationPolicy
   end
   
   def show?
-    user.present?
+    user.present? && user == record.user
   end
   
 end

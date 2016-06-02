@@ -8,4 +8,14 @@ class UsersController < ApplicationController
    }
   end
   
+  def downgrade
+    current_user.update_attribute(:role, 'standard')
+    current_user.wikis.each do |wiki|
+        if wiki.private? == true
+            wiki.private == false
+        else
+            wiki.private? == false
+        end
+    end
+  end
 end

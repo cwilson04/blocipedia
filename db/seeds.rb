@@ -7,10 +7,14 @@ require 'faker'
   )
 end
 
+users = User.all
+
 10.times do
   Wiki.create!(
+    user: users.sample,
     title:  Faker::Lorem.sentence,
-    body:   Faker::Lorem.paragraph
+    body:   Faker::Lorem.paragraph,
+    private: false
   )
 end
 @wiki = Wiki.all

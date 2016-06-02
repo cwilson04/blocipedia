@@ -5,4 +5,16 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
          
   has_many :wikis, dependent: :destroy
+  
+  def standard?
+    role == "standard"
+  end
+  
+  def admin?
+    role == "admin"
+  end
+  
+  def premium?
+    role == "premium"
+  end
 end

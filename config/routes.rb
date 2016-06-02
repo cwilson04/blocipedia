@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
   
   get 'registration_edit' =>'registrations#edit'
+  put 'downgrade' => 'users#downgrade'
   
   
 end

@@ -3,7 +3,7 @@ class WikisController < ApplicationController
   before_action  :authenticate_user!
   
   def index
-    @wikis = Wiki.all
+    @wikis = Wiki.visible_to(current_user)
   end
   
   def new
@@ -14,6 +14,7 @@ class WikisController < ApplicationController
     @wiki = Wiki.new
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
+    @wiki.user = current_user
      if @wiki.save
        flash[:notice] = "That Wiki was saved successfully."
        redirect_to @wiki
@@ -25,6 +26,7 @@ class WikisController < ApplicationController
   
   def show
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
   
   def edit 

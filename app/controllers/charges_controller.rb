@@ -19,6 +19,8 @@ class ChargesController < ApplicationController
      description: "Premium Membership - #{current_user.email}",
      currency: 'usd'
    )
+   
+   current_user.update_attributes(role: 'premium')
  
    flash[:notice] = "Thanks for signing up for a Premium Account, #{current_user.email}!"
    redirect_to user_path(current_user) 
