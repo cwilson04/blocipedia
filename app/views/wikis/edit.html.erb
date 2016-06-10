@@ -27,9 +27,17 @@
    </div>
   </div>
  </div>
+ <div class ="container">
  <h2>Add Collaborator</h2>
  <%= form_tag [@wiki, Collaborator.new] do %>
   <%= text_field_tag :email %>
   <%= submit_tag %>
  <% end %>
  
+ <h2>Collaborators</h2>
+  <% @wiki.collaborators.each do |collaborator| %>
+   <p>
+    <%= collaborator.user.email  %> <%= link_to "remove", [@wiki, collaborator], method: :delete, class: 'btn btn-danger btn-xs' %>
+   </p>
+  <% end %>
+ </div>

@@ -1,32 +1,43 @@
 class CollaboratorsController < ApplicationController
   def create
-    @collaborator = Collaborator.new
-    # redirect back where we came from
-    redirect_to wiki.edit
-    # load wiki
-    
+    @wiki = Wiki.find(params[:wiki_id])
     # load user by email Model.where(prop: this).first
     @user = User.where(email: params[:email]).first
     # there could be no user, load error
-    if @user.email == nil
-      flash[:notice] = "Collaborator email not found"
-    # there could be a user, but already collaborator, load error 
-    
-    # user is self, load error
-    elsif @user == self.user
-      flash[:notice] = "Cannot use self as collaborator"
-    # user present and no collaborator, create collaborator, flash notice - .create return true if successful, false otherwise
-    elsif @user.email == @collaborator.email
-      @collaborator.save
-      flash[:success] = "Collaborator was added successfully"
-    # something went wrong, load error
-    else
-      flash[:notice] = "Something went wrong. Please try again"
-      redirect_to edit_wiki_path
-    
+      if @user.nil?
+        flash[:notice] = "Collaborator email not found"
+
+      # user is self, load error
+      elsif @user == current_user
+        flash[:alert] = "Cannot use self as collaborator"
+       
+      # user present and no collaborator, create collaborator, flash notice - .create return true if successful, false otherwise
+      elsif Collaborator.where(wiki: @wiki, user: @user).first != nil
+        flash[:notice] = "User is already a collaborator"
+      elsif @collaborator = Collaborator.new(wiki: @wiki, user: @user)
+        @collaborator.save
+        flash[:success] = "Collaborator was added successfully"
+        
+      # something went wrong, load error
+      else
+        flash[:alert] = "Something went wrong. Please try again"
+        
+      end
+    redirect_to edit_wiki_path(@wiki)
   end
   
   def destroy
-    
+     @wiki = Wiki.find(params[:wiki_id])
+     @user = User.where(email: params[:email])
+     @collaborator = Collaborator.find(params[:id])
+ 
+     if @collaborator.destroy
+       flash[:notice] = "Collaborator was deleted successfully."
+
+     else
+       flash[:alert] = "Collaborator could not be deleted. Try again."
+
+     end
+     redirect_to edit_wiki_path(@wiki)
   end
 end

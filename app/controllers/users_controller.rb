@@ -16,6 +16,7 @@ class UsersController < ApplicationController
         else
             wiki.private? == false
         end
+        redirect_to user_path
     end
   end
 end

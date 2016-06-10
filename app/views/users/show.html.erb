@@ -31,8 +31,8 @@
           
           <ul class="list-group">
             <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Public Wikis</strong></span> 125</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Private Wikis</strong></span> 13</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Public Wikis</strong></span> <%= current_user.wikis.count %></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Private Wikis</strong></span> <%= current_user.wikis.count %></li>
         
           </ul> 
                
